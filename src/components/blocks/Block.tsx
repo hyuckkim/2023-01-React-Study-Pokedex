@@ -1,9 +1,14 @@
 import React from "react";
 
-function Block() {
+type BlockProps = {
+    title: string,
+    children: JSX.Element
+}
+function Block(prop: BlockProps) {
     return (
         <div>
-            안녕하세요 세계
+            <h2>{prop.title}</h2>
+            {prop.children}
         </div>
     )
 }
