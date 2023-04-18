@@ -7,7 +7,7 @@ export async function GetPokemon(): Promise<Poke> {
 
     return {
         name: pokemon.name,
-        image: pokemon.sprites.front_default!,
+        image: pokemon.sprites.other?.["official-artwork"].front_default!,
     }
 
 }
