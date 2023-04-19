@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 
 import { GetPokemon, Poke } from "@/domains";
-import { Block } from "../components/blocks";
+import { Background, Block, BlockRow } from "../components/blocks";
+import extractColor, { Colors } from "@/domains/colorthief";
 
 
 function MainPage() {
@@ -10,15 +11,30 @@ function MainPage() {
 
     useEffect(() => {
         GetPokemon(1)
-            .then((res => SetPokeData(res)));
+            .then((res => {
+                SetPokeData(res);
+            }));
     })
 
+    const colors: Colors = {color1: "", color2: ""};
+    const [ColorData, SetColorData] = useState(colors);
+
+    var img = useRef<HTMLImageElement>(null);
+    var getBackgroundImage = () => {
+        var imgObj = img.current as HTMLImageElement;
+        var colorData = extractColor(imgObj);
+        console.log(colorData);
+        SetColorData(colorData);
+    }
     return (
         <main>
             <h1>{PokeData.name}</h1>
-            <Block title="picture">
-                <img src={PokeData.image} title={PokeData.name}/>
-            </Block>
+            <BlockRow>
+                <Block title="picture">
+                    <img src={PokeData.image} title={PokeData.name} onLoad={getBackgroundImage} id="PokeImg" ref={img} crossOrigin="anonymous" width={200}/>
+                </Block>
+            </BlockRow>
+            <Background color1={ColorData.color1} color2={ColorData.color2}/>
         </main>
     )
 }

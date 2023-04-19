@@ -5,9 +5,18 @@ type BlockProps = {
     children: JSX.Element
 }
 function Block(prop: BlockProps) {
+    const style: React.CSSProperties = {
+        backgroundColor: "#ffffff",
+        borderRadius: 30,
+        padding: "15px 40px",
+        margin: 30,
+    }
+    const h2style: React.CSSProperties = {
+        margin: 0,
+    }
     return (
-        <div>
-            <h2>{prop.title}</h2>
+        <div style={style}>
+            <h2 style={h2style}>{prop.title}</h2>
             {prop.children}
         </div>
     )
