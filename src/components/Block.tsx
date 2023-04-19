@@ -2,7 +2,7 @@ import React from "react";
 
 type BlockProps = {
     title: string,
-    children: JSX.Element
+    children: JSX.Element | JSX.Element[]
 }
 function Block(prop: BlockProps) {
     const style: React.CSSProperties = {
