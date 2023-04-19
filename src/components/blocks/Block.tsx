@@ -8,7 +8,7 @@ function Block(prop: BlockProps) {
     const style: React.CSSProperties = {
         backgroundColor: "#ffffff",
         borderRadius: 30,
-        padding: "15px 40px",
+        padding: 12,
         margin: 30,
     }
     const h2style: React.CSSProperties = {

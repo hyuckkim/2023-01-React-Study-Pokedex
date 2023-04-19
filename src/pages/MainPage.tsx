@@ -31,7 +31,19 @@ function MainPage() {
             <h1>{PokeData.name}</h1>
             <BlockRow>
                 <Block title="picture">
-                    <img src={PokeData.image} title={PokeData.name} onLoad={getBackgroundImage} id="PokeImg" ref={img} crossOrigin="anonymous" width={200}/>
+                    <img 
+                        src={PokeData.image} 
+                        title={PokeData.name} 
+                        onLoad={getBackgroundImage} 
+                        id="PokeImg" 
+                        ref={img} 
+                        crossOrigin="anonymous" 
+                        style={{
+                            width: 260,
+                            maxHeight: 200,
+                            objectFit: "contain",
+                            objectPosition: "center center",
+                        }}/>
                 </Block>
             </BlockRow>
             <Background color1={ColorData.color1} color2={ColorData.color2}/>
