@@ -9,7 +9,11 @@ function Block(prop: BlockProps) {
         backgroundColor: "#ffffff",
         borderRadius: 30,
         padding: 12,
-        margin: 30,
+        margin: 8,
+
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between"
     }
     const h2style: React.CSSProperties = {
         margin: 0,

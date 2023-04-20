@@ -1,0 +1,11 @@
+.SelectButtonItem {
+    background-color: #fff;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    border-radius: 3px;
+}
+
+.SelectButtonItem:hover {
+    background-color: lightgrey;
+}

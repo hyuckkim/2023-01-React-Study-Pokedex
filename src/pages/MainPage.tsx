@@ -28,13 +28,20 @@ function MainPage() {
         var colorData = extractColor(imgObj);
         SetColorData(colorData);
     }
+    const formattedID = "#" + PokeNo.toString().padStart(3, "0");
     const mySelectButton = <SelectButton 
         leftButtonAction={() => {SetPokeNo(PokeNo - 1)}} 
         rightButtonAction={() => {SetPokeNo(PokeNo + 1)}} 
-        value={"#" + PokeNo.toString().padStart(3, "0")} />
+        value={formattedID} />
     return (
-        <main>
-            <h1>{PokeData.name}</h1>
+        <main style={{ margin: 48}}>
+            <div style={{
+                display: "flex",
+                justifyContent: "space-between"
+            }}>
+                <h1>{PokeData.name}</h1>
+                <h1>{formattedID}</h1>
+            </div>
             <BlockRow>
                 <Block title="picture">
                     <img 
@@ -50,6 +57,9 @@ function MainPage() {
                             objectFit: "contain",
                             objectPosition: "center center",
                         }}/>
+                    {mySelectButton}
+                </Block>
+                <Block title="stats">
                     {mySelectButton}
                 </Block>
             </BlockRow>

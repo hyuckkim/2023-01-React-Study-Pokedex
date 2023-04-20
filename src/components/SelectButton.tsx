@@ -1,3 +1,5 @@
+import './SelectButtonStyle.css'
+
 type SelectButtonProps = {
     leftButtonAction: () => void,
     rightButtonAction: () => void,
@@ -10,11 +12,13 @@ function SelectButton(prop: SelectButtonProps) {
         display: "flex",
         justifyContent: "space-between"
     }
+    var buttonStyle: React.CSSProperties = {
+    }
     return (
         <div style={style}>
-            <button onClick={prop.leftButtonAction}>&lt;</button>
+            <button className="SelectButtonItem" onClick={prop.leftButtonAction}>&lt;</button>
             <span>{prop.value}</span>
-            <button onClick={prop.rightButtonAction}>&gt;</button>
+            <button className="SelectButtonItem" onClick={prop.rightButtonAction}>&gt;</button>
         </div>
     )
 }
