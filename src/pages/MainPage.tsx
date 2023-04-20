@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 
-import { GetPokemon, Poke } from "@/domains";
+import { getPokemon, getPokemonCount, Poke } from "@/domains";
 import { Background, Block, BlockRow, SelectButton } from "@/components";
 import extractColor, { Colors } from "@/domains/colorthief";
 
@@ -13,10 +13,18 @@ function MainPage() {
     const [PokeData, SetPokeData] = useState(emptyPoke);
 
     useEffect(() => {
-        GetPokemon(PokeNo)
+        getPokemon(PokeNo)
             .then((res => {
                 SetPokeData(res);
             }));
+    })
+
+    const pokeCount = 1281;
+    const [PokeCount, SetPokeCount] = useState(pokeCount);
+    useEffect(() => {
+        getPokemonCount().then(res => {
+            SetPokeCount(res);
+        })
     })
 
     const colors: Colors = {color1: "", color2: ""};
@@ -29,10 +37,13 @@ function MainPage() {
         SetColorData(colorData);
     }
     const formattedID = "#" + PokeNo.toString().padStart(3, "0");
+
+
     const mySelectButton = <SelectButton 
-        leftButtonAction={() => {SetPokeNo(PokeNo - 1)}} 
-        rightButtonAction={() => {SetPokeNo(PokeNo + 1)}} 
+        leftButtonAction={() => {SetPokeNo(PokeNo - 1 < 1 ? PokeCount : PokeNo - 1)}} 
+        rightButtonAction={() => {SetPokeNo(PokeNo + 1 > PokeCount ? 1 : PokeNo + 1)}} 
         value={formattedID} />
+
     return (
         <main style={{ margin: 48}}>
             <div style={{

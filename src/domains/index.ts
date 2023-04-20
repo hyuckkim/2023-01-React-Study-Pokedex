@@ -1,4 +1,4 @@
-export { GetPokemon } from './pokenode';
+export { getPokemon, getPokemonCount } from './pokenode';
 export { default as exportColor } from './colorthief';
 
 export type { Colors } from './colorthief'
