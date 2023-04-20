@@ -6,7 +6,8 @@ function BlockRow (prop: BlockRowProps) {
     const style: React.CSSProperties = {
         display: "flex"
     }
-    return (<div style={style}>
+    return (
+    <div style={style}>
         {prop.children}
     </div>)
 }
