@@ -4,6 +4,7 @@ import { getPokemon, getPokemonCount, Poke } from "@/domains";
 import { Background, Block, BlockRow, SelectButton } from "@/components";
 import extractColor, { Colors } from "@/domains/colorthief";
 
+import './MainPageStyle.css';
 
 function MainPage() {
     const pokeNo = 1;
@@ -56,18 +57,10 @@ function MainPage() {
             <BlockRow>
                 <Block title="picture">
                     <img 
-                        src={PokeData.image} 
-                        title={PokeData.name} 
+                        src={PokeData.image} title={PokeData.name} 
                         onLoad={getBackgroundImage} 
-                        id="PokeImg" 
-                        ref={img} 
-                        crossOrigin="anonymous" 
-                        style={{
-                            width: 260,
-                            maxHeight: 200,
-                            objectFit: "contain",
-                            objectPosition: "center center",
-                        }}/>
+                        id="PokeImg" ref={img} 
+                        crossOrigin="anonymous"/>
                     {mySelectButton}
                 </Block>
                 <Block title="stats">
