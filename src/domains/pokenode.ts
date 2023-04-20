@@ -7,12 +7,21 @@ export async function getPokemon(num: number): Promise<Poke> {
     var url = (await api.listPokemons(num - 1, 1)).results[0].url;
     var id = Number(url.split("/").filter(Boolean).pop());
     var pokemon = await api.getPokemonById(id);
+
+
+    var stats = pokemon.stats.map(s => {
+        return {
+            name: s.stat.name,
+            value: s.base_stat,
+        }
+    })
     
     var img = pokemon.sprites.other?.["official-artwork"].front_default!;
     return {
         id: num,
         name: pokemon.name,
-        image: img
+        image: img,
+        stat: stats,
     }
 
 }
@@ -26,4 +35,8 @@ export type Poke = {
     id: number,
     name: string,
     image: string,
+    stat: {
+        name: string;
+        value: number;
+    }[],
 }

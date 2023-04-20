@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from "react";
 
 import { getPokemon, getPokemonCount, Poke } from "@/domains";
-import { Background, Block, BlockRow, SelectButton } from "@/components";
+import { Background, Block, BlockRow, SelectButton, Statbar } from "@/components";
 import extractColor, { Colors } from "@/domains/colorthief";
 
 import './MainPageStyle.css';
@@ -10,7 +10,7 @@ function MainPage() {
     const pokeNo = 1;
     const [PokeNo, SetPokeNo] = useState(pokeNo);
 
-    const emptyPoke: Poke = {id: 0, name: "", image: ""};
+    const emptyPoke: Poke = {id: 0, name: "", image: "", stat: []};
     const [PokeData, SetPokeData] = useState(emptyPoke);
 
     useEffect(() => {
@@ -18,7 +18,7 @@ function MainPage() {
             .then((res => {
                 SetPokeData(res);
             }));
-    })
+    }, [])
 
     const pokeCount = 1281;
     const [PokeCount, SetPokeCount] = useState(pokeCount);
@@ -45,6 +45,13 @@ function MainPage() {
         rightButtonAction={() => {SetPokeNo(PokeNo + 1 > PokeCount ? 1 : PokeNo + 1)}} 
         value={formattedID} />
 
+
+    const titleWidth = 140, barWidth = 480;
+
+    const statbars = PokeData.stat.map( v => {
+        return <Statbar name={v.name} value={v.value} max={150} barWidth={barWidth} titleWidth={titleWidth} color={ColorData.color1}/>
+    })
+
     return (
         <main style={{ margin: 48}}>
             <div style={{
@@ -64,6 +71,9 @@ function MainPage() {
                     {mySelectButton}
                 </Block>
                 <Block title="stats">
+                    <div>
+                        {statbars}
+                    </div>
                     {mySelectButton}
                 </Block>
             </BlockRow>
