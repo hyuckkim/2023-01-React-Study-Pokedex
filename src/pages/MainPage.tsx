@@ -44,10 +44,6 @@ function MainPage() {
 
     const titleWidth = 140, barWidth = 480;
 
-    const statbars = pokeData.stat.map( v => {
-        return <Statbar name={v.name} value={v.value} max={150} barWidth={barWidth} titleWidth={titleWidth} color={colorData.color1}/>
-    })
-
     return (
         <main style={{ margin: 48}}>
             <div style={{
@@ -68,7 +64,11 @@ function MainPage() {
                 </Block>
                 <Block title="stats">
                     <div>
-                        {statbars}
+                        {pokeData.stat.map( v => 
+                        <Statbar 
+                            name={v.name} value={v.value} max={150} 
+                            barWidth={barWidth} titleWidth={titleWidth} color={colorData.color1} 
+                            key={v.name}/>)}
                     </div>
                     {mySelectButton}
                 </Block>
