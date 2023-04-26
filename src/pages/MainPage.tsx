@@ -31,10 +31,10 @@ function MainPage() {
     const colors: Colors = {color1: "", color2: ""};
     const [ColorData, SetColorData] = useState(colors);
 
-    var img = useRef<HTMLImageElement>(null);
-    var getBackgroundImage = () => {
-        var imgObj = img.current as HTMLImageElement;
-        var colorData = extractColor(imgObj);
+    const img = useRef<HTMLImageElement>(null);
+    const getBackgroundImage = () => {
+        const imgObj = img.current as HTMLImageElement;
+        const colorData = extractColor(imgObj);
         SetColorData(colorData);
     }
     const formattedID = "#" + PokeNo.toString().padStart(3, "0");

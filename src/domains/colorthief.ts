@@ -2,7 +2,7 @@ import ColorThief, { RGBColor } from "colorthief";
 
 function extractColor(img: HTMLImageElement) {
     const thief = new ColorThief();
-    var palette = thief.getPalette(img)
+    const palette = thief.getPalette(img)
 
     return {
         color1: buildRGBColor(addRGBColor(palette[0], [15, 0, 0])),

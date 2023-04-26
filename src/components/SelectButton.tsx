@@ -8,11 +8,11 @@ type SelectButtonProps = {
 }
 
 function SelectButton(prop: SelectButtonProps) {
-    var style: React.CSSProperties = {
+    const style: React.CSSProperties = {
         display: "flex",
         justifyContent: "space-between"
     }
-    var buttonStyle: React.CSSProperties = {
+    const buttonStyle: React.CSSProperties = {
     }
     return (
         <div style={style}>
