@@ -7,49 +7,45 @@ import extractColor, { Colors } from "@/domains/colorthief";
 import './MainPageStyle.css';
 
 function MainPage() {
-    const pokeNo = 1;
-    const [PokeNo, SetPokeNo] = useState(pokeNo);
+    const [pokeNo, setPokeNo] = useState(1);
 
-    const emptyPoke: Poke = {id: 0, name: "", image: "", stat: []};
-    const [PokeData, SetPokeData] = useState(emptyPoke);
+    const [pokeData, setPokeData] = useState<Poke>({id: 0, name: "", image: "", stat: []});
 
     useEffect(() => {
-        getPokemon(PokeNo)
+        getPokemon(pokeNo)
             .then((res => {
-                SetPokeData(res);
+                setPokeData(res);
             }));
     }, [])
 
-    const pokeCount = 1281;
-    const [PokeCount, SetPokeCount] = useState(pokeCount);
+    const [pokeCount, setPokeCount] = useState(1281);
     useEffect(() => {
         getPokemonCount().then(res => {
-            SetPokeCount(res);
+            setPokeCount(res);
         })
     })
 
-    const colors: Colors = {color1: "", color2: ""};
-    const [ColorData, SetColorData] = useState(colors);
+    const [colorData, setColorData] = useState<Colors>({color1: "", color2: ""});
 
     const img = useRef<HTMLImageElement>(null);
     const getBackgroundImage = () => {
         const imgObj = img.current as HTMLImageElement;
-        const colorData = extractColor(imgObj);
-        SetColorData(colorData);
+        const resultData = extractColor(imgObj);
+        setColorData(resultData);
     }
-    const formattedID = "#" + PokeNo.toString().padStart(3, "0");
+    const formattedID = "#" + pokeNo.toString().padStart(3, "0");
 
 
     const mySelectButton = <SelectButton 
-        leftButtonAction={() => {SetPokeNo(PokeNo - 1 < 1 ? PokeCount : PokeNo - 1)}} 
-        rightButtonAction={() => {SetPokeNo(PokeNo + 1 > PokeCount ? 1 : PokeNo + 1)}} 
+        leftButtonAction={() => {setPokeNo(pokeNo - 1 < 1 ? pokeCount : pokeNo - 1)}} 
+        rightButtonAction={() => {setPokeNo(pokeNo + 1 > pokeCount ? 1 : pokeNo + 1)}} 
         value={formattedID} />
 
 
     const titleWidth = 140, barWidth = 480;
 
-    const statbars = PokeData.stat.map( v => {
-        return <Statbar name={v.name} value={v.value} max={150} barWidth={barWidth} titleWidth={titleWidth} color={ColorData.color1}/>
+    const statbars = pokeData.stat.map( v => {
+        return <Statbar name={v.name} value={v.value} max={150} barWidth={barWidth} titleWidth={titleWidth} color={colorData.color1}/>
     })
 
     return (
@@ -58,13 +54,13 @@ function MainPage() {
                 display: "flex",
                 justifyContent: "space-between"
             }}>
-                <h1>{PokeData.name}</h1>
+                <h1>{pokeData.name}</h1>
                 <h1>{formattedID}</h1>
             </div>
             <BlockRow>
                 <Block title="picture">
                     <img 
-                        src={PokeData.image} title={PokeData.name} 
+                        src={pokeData.image} title={pokeData.name} 
                         onLoad={getBackgroundImage} 
                         id="PokeImg" ref={img} 
                         crossOrigin="anonymous"/>
@@ -77,7 +73,7 @@ function MainPage() {
                     {mySelectButton}
                 </Block>
             </BlockRow>
-            <Background color1={ColorData.color1} color2={ColorData.color2}/>
+            <Background color1={colorData.color1} color2={colorData.color2}/>
         </main>
     )
 }
