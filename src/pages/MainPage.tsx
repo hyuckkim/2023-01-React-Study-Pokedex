@@ -1,14 +1,14 @@
 import React, {useState, useEffect, useRef} from "react";
 
 import { getPokemon, getPokemonCount, Poke } from "@/domains";
-import { Background, Block, BlockRow, SelectButton, Statbar } from "@/components";
+import { Background, Block, BlockRow, EvolutionPic, Nametag, SelectButton, Statbar } from "@/components";
 import extractColor, { Colors } from "@/domains/colorthief";
 
 import './MainPageStyle.css';
 
 function MainPage() {
     const [pokeNo, setPokeNo] = useState(1);
-    const [pokeData, setPokeData] = useState<Poke>({id: 0, name: "", image: "", stat: []});
+    const [pokeData, setPokeData] = useState<Poke>({id: 0, name: "", image: "", stat: [], type: [], evolves: []});
     const [pokeCount, setPokeCount] = useState(1281);
     const [colorData, setColorData] = useState<Colors>({color1: "", color2: ""});
 
@@ -68,6 +68,22 @@ function MainPage() {
                             name={v.name} value={v.value} max={150} 
                             barWidth={barWidth} titleWidth={titleWidth} color={colorData.color1} 
                             key={v.name}/>)}
+                    </div>
+                    {mySelectButton}
+                </Block>
+            </BlockRow>
+            <BlockRow>
+                <Block title="type">
+                    <div>
+                        {pokeData.type.map( t => 
+                        <Nametag key={t}>{t}</Nametag>)}
+                    </div>
+                    {mySelectButton}
+                </Block>
+                <Block title="evolution chain">
+                    <div>
+                        {pokeData.evolves.map (e => 
+                        <EvolutionPic name={e.name} src={e.pic}/>)}
                     </div>
                     {mySelectButton}
                 </Block>
