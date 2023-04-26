@@ -8,8 +8,9 @@ import './MainPageStyle.css';
 
 function MainPage() {
     const [pokeNo, setPokeNo] = useState(1);
-
     const [pokeData, setPokeData] = useState<Poke>({id: 0, name: "", image: "", stat: []});
+    const [pokeCount, setPokeCount] = useState(1281);
+    const [colorData, setColorData] = useState<Colors>({color1: "", color2: ""});
 
     useEffect(() => {
         getPokemon(pokeNo)
@@ -18,14 +19,12 @@ function MainPage() {
             }));
     }, [])
 
-    const [pokeCount, setPokeCount] = useState(1281);
     useEffect(() => {
         getPokemonCount().then(res => {
             setPokeCount(res);
         })
     })
 
-    const [colorData, setColorData] = useState<Colors>({color1: "", color2: ""});
 
     const img = useRef<HTMLImageElement>(null);
     const getBackgroundImage = () => {
