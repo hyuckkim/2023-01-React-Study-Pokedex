@@ -74,9 +74,9 @@ function MainPage() {
             </BlockRow>
             <BlockRow>
                 <Block title="type">
-                    <div>
+                    <div style={{display: "flex", width: 400, height: "100%"}}>
                         {pokeData.type.map( t => 
-                        <Nametag key={t}>{t}</Nametag>)}
+                        <Nametag key={t} color={colorData.color1}>{t}</Nametag>)}
                     </div>
                     {mySelectButton}
                 </Block>
