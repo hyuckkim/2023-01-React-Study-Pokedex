@@ -5,9 +5,10 @@ type EvolutionPicProps = {
 
 function EvolutionPic(prop: EvolutionPicProps) {
     return (
-        <div>
-            <img src={prop.src} title={prop.name}/>
-            <p>{prop.name}</p>
+        <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+            <p style={{}}>{prop.name}</p>
+            <img src={prop.src} title={prop.name}
+                style={{width: 150}}/>
         </div>
     )
 }

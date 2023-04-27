@@ -81,7 +81,7 @@ function MainPage() {
                     {mySelectButton}
                 </Block>
                 <Block title="evolution chain">
-                    <div>
+                    <div style={{display: "flex"}}>
                         {pokeData.evolves.map (e => 
                         <EvolutionPic name={e.name} src={e.pic}/>)}
                     </div>
