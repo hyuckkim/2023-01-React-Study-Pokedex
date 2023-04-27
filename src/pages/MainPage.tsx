@@ -17,13 +17,13 @@ function MainPage() {
             .then((res => {
                 setPokeData(res);
             }));
-    }, [])
+    }, [pokeNo])
 
     useEffect(() => {
         getPokemonCount().then(res => {
             setPokeCount(res);
         })
-    })
+    }, [])
 
 
     const img = useRef<HTMLImageElement>(null);
@@ -83,7 +83,7 @@ function MainPage() {
                 <Block title="evolution chain">
                     <div style={{display: "flex"}}>
                         {pokeData.evolves.map (e => 
-                        <EvolutionPic name={e.name} src={e.pic}/>)}
+                        <EvolutionPic name={e.name} src={e.pic} key={e.name}/>)}
                     </div>
                     {mySelectButton}
                 </Block>
