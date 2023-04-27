@@ -13,4 +13,5 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src") // map '@' to './src' 
     },
   },
+  base: "/2023-01-React-Study-Pokedex/"
 })
