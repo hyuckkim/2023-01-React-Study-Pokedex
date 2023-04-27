@@ -16,7 +16,8 @@ export async function getPokemon(num: number): Promise<Poke> {
     })
 
     const specId = getID(pokemon.species.url);
-    const evolutions = await Promise.all(await getEvolutionById(specId));
+    const evolID = getID((await api.getPokemonSpeciesById(specId)).evolution_chain.url);
+    const evolutions = await Promise.all(await getEvolutionById(evolID));
 
     const pokeType = pokemon.types.map(s => {
         return s.type.name
