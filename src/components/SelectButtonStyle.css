@@ -1,5 +1,5 @@
 .SelectButtonItem {
-    background-color: #fff;
+    background-color: #fff0;
     width: 30px;
     height: 30px;
     border: 0;
@@ -7,5 +7,5 @@
 }
 
 .SelectButtonItem:hover {
-    background-color: lightgrey;
+    background-color: #aaa5;
 }

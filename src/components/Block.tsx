@@ -6,7 +6,7 @@ type BlockProps = {
 }
 function Block(prop: BlockProps) {
     const style: React.CSSProperties = {
-        backgroundColor: "#ffffff",
+        backgroundColor: "#fffa",
         borderRadius: 30,
         padding: 12,
         margin: 8,
