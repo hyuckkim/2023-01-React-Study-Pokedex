@@ -1,5 +1,4 @@
 import { PokemonClient, EvolutionClient, ChainLink } from "pokenode-ts";
-import { exportColor } from ".";
 
 export async function getPokemon(num: number): Promise<Poke> {
     const api = new PokemonClient();
