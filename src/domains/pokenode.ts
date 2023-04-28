@@ -3,9 +3,10 @@ import { PokemonClient, EvolutionClient, ChainLink } from "pokenode-ts";
 export async function getPokemon(num: number): Promise<Poke> {
     const api = new PokemonClient();
 
-    const url = (await api.listPokemons(num - 1, 1)).results[0].url;
+    const url = (await api.listPokemonSpecies(num - 1, 1)).results[0].url;
     const id = Number(url.split("/").filter(Boolean).pop());
-    const pokemon = await api.getPokemonById(id);
+    const pokeSpec = await api.getPokemonSpeciesById(id);
+    const pokemon = await api.getPokemonById(getID(pokeSpec.varieties[0].pokemon.url))
 
     const stats = pokemon.stats.map(s => {
         return {
@@ -14,8 +15,7 @@ export async function getPokemon(num: number): Promise<Poke> {
         }
     })
 
-    const specId = getID(pokemon.species.url);
-    const evolID = getID((await api.getPokemonSpeciesById(specId)).evolution_chain.url);
+    const evolID = getID((await api.getPokemonSpeciesById(id)).evolution_chain.url);
     const evolutions = await Promise.all(await getEvolutionById(evolID));
 
     const pokeType = pokemon.types.map(s => {
@@ -25,7 +25,7 @@ export async function getPokemon(num: number): Promise<Poke> {
     const img = pokemon.sprites.other?.["official-artwork"].front_default!;
     return {
         id: num,
-        name: pokemon.name,
+        name: pokeSpec.name,
         image: img,
         stat: stats,
         type: pokeType,
@@ -36,7 +36,7 @@ export async function getPokemon(num: number): Promise<Poke> {
 export async function getPokemonCount(): Promise<number> {
     const api = new PokemonClient();
 
-    return (await api.listPokemons(0, 1)).count;
+    return (await api.listPokemonSpecies(0, 1)).count;
 }
 
 function getID (url: string) {
