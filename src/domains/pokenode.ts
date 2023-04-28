@@ -4,9 +4,9 @@ export async function getPokemon(num: number): Promise<Poke> {
     const api = new PokemonClient();
 
     const url = (await api.listPokemonSpecies(num - 1, 1)).results[0].url;
-    const id = Number(url.split("/").filter(Boolean).pop());
+    const id = getID(url);
     const pokeSpec = await api.getPokemonSpeciesById(id);
-    const pokemon = await api.getPokemonById(getID(pokeSpec.varieties[0].pokemon.url))
+    const pokemon = await api.getPokemonById(getID(pokeSpec.varieties[0].pokemon.url));
 
     const stats = pokemon.stats.map(s => {
         return {
@@ -15,7 +15,7 @@ export async function getPokemon(num: number): Promise<Poke> {
         }
     })
 
-    const evolID = getID((await api.getPokemonSpeciesById(id)).evolution_chain.url);
+    const evolID = getID(pokeSpec.evolution_chain.url);
     const evolutions = await Promise.all(await getEvolutionById(evolID));
 
     const pokeType = pokemon.types.map(s => {
