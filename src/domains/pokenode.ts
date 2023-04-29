@@ -50,7 +50,7 @@ async function getEvolutionById(id: number): Promise<Promise<{ name: string; pic
     recursiveEvolve(chain.chain.evolves_to);
     
     function recursiveEvolve(chain: ChainLink[]) {
-        chain.map(c => {
+        chain.forEach(c => {
             speciesURLs.push(c.species.url);
             recursiveEvolve(c.evolves_to);
         })
